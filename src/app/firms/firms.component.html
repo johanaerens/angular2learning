@@ -9,3 +9,33 @@ Filter {{filterText}}
 <div *ngFor="let firm of firms| firmsPipe:filterText">
   {{firm.firmNumber}} - {{firm.firmName}} - {{firm.startDate|date:'dd/MM/yyyy'}}
 </div>
+
+<table class="table table-striped" [data]="firms" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+  <tr>
+    <th style="width: 25%">
+      <mfDefaultSorter by="name">firmNumber</mfDefaultSorter>
+    </th>
+    <th style="width: 50%">
+      <mfDefaultSorter by="email">firmName</mfDefaultSorter>
+    </th>
+    <th style="width: 25%">
+      <mfDefaultSorter by="age">startDate</mfDefaultSorter>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of mf.data">
+    <td>{{item.firmNumber}}</td>
+    <td>{{item.firmName}}</td>
+    <td class="text-right">{{item.startDate}}</td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td colspan="4">
+      <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+    </td>
+  </tr>
+  </tfoot>
+</table>
