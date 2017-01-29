@@ -1,0 +1,11 @@
+<p>
+  {{title}}
+</p>
+
+<input type="text" [(ngModel)]="filterText"/>
+Filter {{filterText}}
+<button (click)="resetFilter()">Reset</button>
+<br><br>
+<div *ngFor="let firm of firms| firmsPipe:filterText">
+  {{firm.firmNumber}} - {{firm.firmName}} - {{firm.startDate|date:'dd/MM/yyyy'}}
+</div>
