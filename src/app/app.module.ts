@@ -6,6 +6,7 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {FirmsComponent} from "./firms/firms.component";
 import {FirmsPipePipe} from './firms/firms-filter.pipe';
+import {TooltipModule} from "ng2-bootstrap";
 import {DataTableModule} from "angular2-datatable";
 
 @NgModule({

@@ -2,25 +2,24 @@
   {{title}}
 </p>
 
-<input type="text" [(ngModel)]="filterText"/>
-Filter {{filterText}}
-<button (click)="resetFilter()" class="btn btn-primary">Reset</button>
-<br><br>
-<div *ngFor="let firm of firms| firmsPipe:filterText">
-  {{firm.firmNumber}} - {{firm.firmName}} - {{firm.startDate|date:'dd/MM/yyyy'}}
-</div>
-
-<table class="table table-striped" [data]="firms" #mf="mfDataTable" [mfRowsOnPage]="5">
+<table class="table table-striped" [mfData]="firms| firmsPipe : filterText" #mf="mfDataTable" [mfRowsOnPage]="5" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
   <thead>
   <tr>
     <th style="width: 25%">
-      <mfDefaultSorter by="name">firmNumber</mfDefaultSorter>
+      <mfDefaultSorter by="firmNumber">firmNumber</mfDefaultSorter>
     </th>
     <th style="width: 50%">
-      <mfDefaultSorter by="email">firmName</mfDefaultSorter>
+      <mfDefaultSorter by="firmName">firmName</mfDefaultSorter>
     </th>
     <th style="width: 25%">
-      <mfDefaultSorter by="age">startDate</mfDefaultSorter>
+      <mfDefaultSorter by="startDate">startDate</mfDefaultSorter>
+    </th>
+  </tr>
+  <tr>
+    <th colspan="3">
+      Filter by firmName:
+      <input class="form-control" [(ngModel)]="filterText"/>
+      <button (click)="resetFilter()" class="btn btn-primary" tooltip="Reset search">Reset</button>
     </th>
   </tr>
   </thead>
@@ -28,7 +27,7 @@ Filter {{filterText}}
   <tr *ngFor="let item of mf.data">
     <td>{{item.firmNumber}}</td>
     <td>{{item.firmName}}</td>
-    <td class="text-right">{{item.startDate}}</td>
+    <td>{{item.startDate|date:'dd/MM/yyyy'}}</td>
   </tr>
   </tbody>
   <tfoot>
